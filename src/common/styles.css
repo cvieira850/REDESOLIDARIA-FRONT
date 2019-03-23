@@ -1,0 +1,90 @@
+div[role="alert"] {
+    margin-left: 10px;
+}
+
+/* FORM */
+.form_reader {
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+    height: 60px;
+    background-color: #66009a;
+    color: #fff;
+}
+
+.form__input {
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid #e3e3e3;
+}
+
+.form__select {
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid #e3e3e3;
+    box-shadow: none !important;
+}
+
+.form__select:focus {
+    height: 40px;
+    border: 1px solid #660099 !important;
+    background-color: #ffffff;
+}
+
+.form__input:focus {
+    height: 40px;
+    border: 1px solid #93b653 !important;
+    background-color: #ffffff;
+}
+.form__label_login {
+    height: 30px;
+    color: #b66d19;
+    font-family: "officinaserif-book";
+    font-size: 16px;
+    margin-top: 15px;
+    /* Text style for "Nome compl" */
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.form__label {
+    height: 30px;
+    color: #666666;
+    font-family: "officinaserif-book";
+    font-size: 16px;
+    margin-top: 15px;
+    /* Text style for "Nome compl" */
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.title {
+    font-family: "officinaserif-book";
+    font-weight: 300;
+    line-height: 36px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #93b653 !important;
+}
+
+/*  DEFAULT */
+
+.form-control {
+    box-shadow: none !important;
+}
+
+.modal-footer {
+    border-top: unset;
+}
+
+.btn {
+    margin: 0;
+}
+
+.required:after {
+    content: "*";
+    color: red;
+}

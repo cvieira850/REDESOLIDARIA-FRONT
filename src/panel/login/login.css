@@ -1,0 +1,9 @@
+.login__submit {
+    /* Style for "button" */
+    height: 48px;
+    background-color: #660099 !important;
+    font-family: "officinaserif-bold";
+}
+.btn-block {
+    background-color: #93b653 !important;
+}
