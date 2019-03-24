@@ -74,3 +74,6 @@ progress::-webkit-progress-bar {
 .progress {
     background-color: #b6681f !important;
 }
+img {
+    width: 64px;
+}
