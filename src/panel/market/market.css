@@ -1,0 +1,76 @@
+.invalid-feedback {
+    color: #e44444 !important;
+    font-family: "officinaserif-book";
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 28px;
+}
+
+.needs-validation .btn {
+    margin-top: 49px !important  ;
+}
+
+.btn-block {
+    background-color: #93b653 !important;
+}
+.btn-block:focus {
+    background-color: #93b653;
+}
+.form__submit {
+    /* Style for "button" */
+    background-color: #660099 !important;
+    font-family: "officinaserif-bold";
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 700;
+}
+.btn-default:focus {
+    background-color: #66bb33;
+}
+
+/* .form__describe-itens{
+        justify-content: space-between;
+        align-items: center;
+    } */
+
+.form__describe-btn {
+    font-family: "officinaserif-bold";
+    font-weight: 300 !important;
+}
+
+.form__describe-btn--red {
+    background-color: #e44444 !important;
+}
+
+.form__describe-btn--green {
+    background-color: #66bb33 !important;
+    margin-top: 26px;
+}
+.lalala:focus {
+    border: 1px solid #93b653 !important;
+}
+.form__submit {
+    /* Style for "button" */
+    background-color: #93b653 !important;
+    font-family: "officinaserif-bold";
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 700;
+}
+btn-primary {
+    background: #93b653 !important;
+    color: red !important;
+}
+progress,                          /* Firefox  */
+progress[role][aria-valuenow] {
+    /* Polyfill */
+    background: #b6681f !important; /* !important is needed by the polyfill */
+}
+
+/* Chrome */
+progress::-webkit-progress-bar {
+    background: #b6681f !important;
+}
+.progress {
+    background-color: #b6681f !important;
+}

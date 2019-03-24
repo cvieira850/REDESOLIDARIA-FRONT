@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import { Container, Footer } from 'mdbreact';
-import { Login, Welcome } from "./panel";
+import { Login, Welcome, Market } from "./panel";
 import "./App.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
@@ -16,6 +16,7 @@ const App = () => (
                     <Route exact path="/" component={Login} />
                     <Main>
                         <Route exact path="/Welcome" component={Welcome} />
+                        <Route exact path="/Market" component={Market} />
                     </Main>
                 </Switch>
             </Router>

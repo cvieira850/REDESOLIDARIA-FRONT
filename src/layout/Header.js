@@ -46,7 +46,7 @@ class Header extends Component {
                                 active={activeItem === "market"}
                                 onClick={this.setNav}
                             >
-                                <NavLink to="/take" name="market">
+                                <NavLink to="/market" name="market">
                                     Feira Orgânica
                                 </NavLink>
                             </NavItem>

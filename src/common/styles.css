@@ -30,7 +30,7 @@ div[role="alert"] {
 
 .form__select:focus {
     height: 40px;
-    border: 1px solid #660099 !important;
+    border: 1px solid #93b653 !important;
     background-color: #ffffff;
 }
 

@@ -48,7 +48,7 @@ class Welcome extends Component {
                     <CardBody style={{ paddingLeft: 0 }}>
                         <h5>
                             Navegue nos menus habilitados para a solicitação de
-                            de produtos e outras funcionalidades.
+                            produtos e outras funcionalidades.
                         </h5>
                     </CardBody>
                 </Card>
