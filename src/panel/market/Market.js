@@ -27,8 +27,8 @@ const listInitial = [
         Indice: 121123,
         Img: Imagem,
         Nome: "Abacate",
-        PrecoString: "R$: 5,00 cada bdg 500g",
-        PrecoSolidarioString: "R$: 7,00 cada bdg 500g",
+        PrecoString: "R$: 7,00 cada bdg 500g",
+        PrecoSolidarioString: "R$: 5,00 cada bdg 500g",
         isSolidary: false,
         isComun: false,
         Preco: 5,
@@ -38,8 +38,8 @@ const listInitial = [
         Indice: 121124,
         Img: Imagem,
         Nome: "Banana",
-        PrecoString: "R$: 7,00 cada 500g",
-        PrecoSolidarioString: "R$: 9,00 cada 500g",
+        PrecoString: "R$: 9,00 cada 500g",
+        PrecoSolidarioString: "R$: 7,00 cada 500g",
         isSolidary: false,
         isComun: false,
         Preco: 7,
@@ -49,8 +49,74 @@ const listInitial = [
         Indice: 121125,
         Img: Imagem,
         Nome: "Abacaxi",
-        PrecoString: "R$: 12,00 cada 1 unidade",
-        PrecoSolidarioString: "R$: 14,00 cada 1 unidade",
+        PrecoString: "R$: 14,00 cada 1 unidade",
+        PrecoSolidarioString: "R$: 12,00 cada 1 unidade",
+        isSolidary: false,
+        isComun: false,
+        Preco: 12,
+        PrecoSolidario: 14
+    },
+    {
+        Indice: 121126,
+        Img: Imagem,
+        Nome: "Uva Preta",
+        PrecoString: "R$: 7,00 cada bdg 500g",
+        PrecoSolidarioString: "R$: 5,00 cada bdg 500g",
+        isSolidary: false,
+        isComun: false,
+        Preco: 5,
+        PrecoSolidario: 7
+    },
+    {
+        Indice: 121127,
+        Img: Imagem,
+        Nome: "Laranja Lima",
+        PrecoString: "R$: 9,00 cada 500g",
+        PrecoSolidarioString: "R$: 7,00 cada 500g",
+        isSolidary: false,
+        isComun: false,
+        Preco: 7,
+        PrecoSolidario: 9
+    },
+    {
+        Indice: 121128,
+        Img: Imagem,
+        Nome: "Limão CravoSP",
+        PrecoString: "R$: 14,00 cada 1 unidade",
+        PrecoSolidarioString: "R$: 12,00 cada 1 unidade",
+        isSolidary: false,
+        isComun: false,
+        Preco: 12,
+        PrecoSolidario: 14
+    },
+    {
+        Indice: 121129,
+        Img: Imagem,
+        Nome: "Maçã",
+        PrecoString: "R$: 7,00 cada bdg 500g",
+        PrecoSolidarioString: "R$: 5,00 cada bdg 500g",
+        isSolidary: false,
+        isComun: false,
+        Preco: 5,
+        PrecoSolidario: 7
+    },
+    {
+        Indice: 121130,
+        Img: Imagem,
+        Nome: "Arroz",
+        PrecoString: "R$: 9,00 cada 500g",
+        PrecoSolidarioString: "R$: 7,00 cada 500g",
+        isSolidary: false,
+        isComun: false,
+        Preco: 7,
+        PrecoSolidario: 9
+    },
+    {
+        Indice: 121131,
+        Img: Imagem,
+        Nome: "Pêssego",
+        PrecoString: "R$: 14,00 cada 1 unidade",
+        PrecoSolidarioString: "R$: 12,00 cada 1 unidade",
         isSolidary: false,
         isComun: false,
         Preco: 12,
@@ -87,7 +153,8 @@ const initialState = {
     modalPedido: false,
     modalMarketSuccess: false,
     checkAgree: false,
-    pedido: []
+    pedido: [],
+    totalPedido: 0
 };
 class Market extends Component {
     constructor() {
@@ -136,9 +203,37 @@ class Market extends Component {
         console.log(this.state);
         event.preventDefault();
         event.target.className += " was-validated";
+        const { list } = this.state;
+        let pedidoCreate = [];
+        let pedidoCreateObj = {};
+        let totalPedido2 = 0;
+        for (var a of list) {
+            if (a.isSolidary || a.isComun) {
+                if (a.quantidade && a.quantidade !== "0") {
+                    pedidoCreateObj = {
+                        indice: a.Indice,
+                        name: a.Nome,
+                        preco: a.isSolidary ? a.PrecoSolidario : a.Preco,
+                        is_solidary: a.isSolidary,
+                        is_comun: a.isComun,
+                        quantidade: a.quantidade,
+                        valor_final_produto:
+                            (a.isSolidary ? a.PrecoSolidario : a.Preco) *
+                            a.quantidade
+                    };
+                    pedidoCreate = [...pedidoCreate, pedidoCreateObj];
+                    totalPedido2 =
+                        totalPedido2 +
+                        (a.isSolidary ? a.PrecoSolidario : a.Preco) *
+                            a.quantidade;
+                }
+            }
+        }
 
         this.setState({
-            modal: true
+            modal: true,
+            pedido: pedidoCreate,
+            totalPedido: totalPedido2
         });
         this.callSendMarket();
         //this.getProtocol();
@@ -183,17 +278,21 @@ class Market extends Component {
     };
 
     changeQuantity = (v, index) => {
-        const { list, pedido, quantidade } = this.state;
+        const { list, totalPedido, quantidade } = this.state;
         //const { value } = event.target;
         let listChange = list;
         console.log(list[index]);
         listChange[index].quantidade = v.value;
         this.setState({ list: listChange });
     };
+    toggle = () => {
+        this.setState({ modalPedido: false });
+    };
     toggleMarketFinish = () => {
-        const { list } = this.state;
+        const { list, totalPedido } = this.state;
         let pedidoCreate = [];
         let pedidoCreateObj = {};
+        let totalPedido2 = 0;
         for (var a of list) {
             if (a.isSolidary || a.isComun) {
                 if (a.quantidade && a.quantidade !== "0") {
@@ -206,19 +305,30 @@ class Market extends Component {
                         quantidade: a.quantidade,
                         valor_final_produto:
                             (a.isSolidary ? a.PrecoSolidario : a.Preco) *
-                            a.quantidade
+                            a.quantidade,
+                        valor_final_pedido:
+                            totalPedido +
+                            (a.isSolidary ? a.PrecoSolidario : a.Preco) *
+                                a.quantidade
                     };
+
+                    totalPedido2 =
+                        totalPedido2 +
+                        (a.isSolidary ? a.PrecoSolidario : a.Preco) *
+                            a.quantidade;
+
                     pedidoCreate = [...pedidoCreate, pedidoCreateObj];
                 }
             }
         }
 
-        setTimeout(() => {
-            this.setState({
-                modalMarketSuccess: !this.state.modalMarketSuccess,
-                pedido: pedidoCreate
-            });
-        }, 1200);
+        // setTimeout(() => {
+        this.setState({
+            totalPedido: totalPedido2,
+            modalMarketSuccess: !this.state.modalMarketSuccess,
+            pedido: pedidoCreate
+        });
+        //}, 1200);
     };
     render() {
         const {
@@ -461,8 +571,31 @@ class Market extends Component {
                                         estiver de acordo!
                                     </h4>
                                 </div>
+                                <div
+                                    style={{
+                                        padding: "0px",
+                                        marginTop: "20px",
+                                        maxHeight: "34vh",
+                                        overflowY: "scroll",
+                                        border: "1px solid rgba(0,0,0,0.1)"
+                                    }}
+                                >
+                                    <h5 className="title2">Lista de Pedidos</h5>
+                                    {this.state.pedido.map((l, i) => (
+                                        <p style={{ marginLeft: "10px" }}>
+                                            <b>{l.name}: </b> {l.quantidade}{" "}
+                                            unidade(s)
+                                        </p>
+                                    ))}
+                                    {
+                                        <p style={{ marginLeft: "10px" }}>
+                                            <b>Valor total do Pedido: </b>R$:
+                                            {this.state.totalPedido}
+                                        </p>
+                                    }
+                                </div>
                             </MDBCol>
-                            <MDBCol md="12">
+                            <MDBCol md="12" style={{ padding: 5 }}>
                                 <input
                                     type="checkbox"
                                     id="checkbox1"

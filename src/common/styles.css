@@ -69,7 +69,15 @@ div[role="alert"] {
     font-weight: 700;
     color: #93b653 !important;
 }
-
+.title2 {
+    font-family: "officinaserif-book";
+    font-weight: 300;
+    line-height: 36px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #b66d19 !important;
+    text-align: center;
+}
 /*  DEFAULT */
 
 .form-control {
