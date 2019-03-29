@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Card, CardTitle, CardBody, ToastContainer, toast } from "mdbreact";
-//import { connect } from "react-redux";
+import { connect } from "react-redux";
 import { fetchWelcomeAlert } from "../../actions";
-//import { capitalize } from "../../common/Helpers";
+import { capitalize } from "../../common/Helpers";
 import "../../common/styles.css";
 
 class Welcome extends Component {
@@ -12,22 +12,19 @@ class Welcome extends Component {
     }
 
     componentDidMount() {
-        //if (
-        //    typeof this.props.user.id == "undefined" ||
-        //    this.props.user.id == null
-        //) {
-        //    this.props.history.push("/");
-        //} else {
-        //    if (!this.props.welcomeAlert) {
-        //        toast.info(
-        //            "Seja-bem vindo, " // + capitalize(this.props.user.nome)
-        //        );
-        //        this.props.fetchWelcomeAlert(true);
-        //    }
-        //}
-        toast.info(
-            "Seja-bem vindo, " // + capitalize(this.props.user.nome)
-        );
+        if (
+            typeof this.props.user.id == "undefined" ||
+            this.props.user.id == null
+        ) {
+            this.props.history.push("/");
+        } else {
+            if (!this.props.welcomeAlert) {
+                toast.info(
+                    "Seja-bem vindo, " + capitalize(this.props.user.nome)
+                );
+                this.props.fetchWelcomeAlert(true);
+            }
+        }
     }
 
     render() {
@@ -62,12 +59,14 @@ class Welcome extends Component {
     }
 }
 
-//function mapStateToProps(state, props) {
-//    return {
-//        user: state.user.user,
-//        welcomeAlert: state.user.welcomeAlert
-//    }
-//}
-//
-//export default connect(mapStateToProps, { fetchWelcomeAlert })(Welcome);
-export default Welcome;
+function mapStateToProps(state, props) {
+    return {
+        user: state.user.user,
+        welcomeAlert: state.user.welcomeAlert
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    { fetchWelcomeAlert }
+)(Welcome);

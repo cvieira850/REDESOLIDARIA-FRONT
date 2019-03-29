@@ -8,7 +8,7 @@ import {
     NavItem,
     NavLink
 } from "mdbreact";
-//import { connect } from "react-redux";
+import { connect } from "react-redux";
 import { logout } from "../actions";
 import "./header.css";
 
@@ -66,5 +66,7 @@ class Header extends Component {
     }
 }
 
-//export default connect(    null,    { logout })(Header);
-export default Header;
+export default connect(
+    null,
+    { logout }
+)(Header);

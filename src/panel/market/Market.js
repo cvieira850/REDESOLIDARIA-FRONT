@@ -21,6 +21,7 @@ import {
 } from "mdbreact";
 import Select from "react-select";
 import "../../common/styles.css";
+import { connect } from "react-redux";
 import Imagem from "../../img/1.png";
 const listInitial = [
     {
@@ -157,9 +158,24 @@ const initialState = {
     totalPedido: 0
 };
 class Market extends Component {
-    constructor() {
-        super();
-        this.state = initialState;
+    constructor(props) {
+        super(props);
+        this.state = {
+            list: listInitial,
+            quantidade: {},
+            modal: false,
+            modalPedido: false,
+            modalMarketSuccess: false,
+            checkAgree: false,
+            pedido: [],
+            totalPedido: 0,
+            cpf: this.props.user.cpf,
+            telefone: this.props.user.telefone,
+            id: this.props.user.id,
+            login: this.props.user.login,
+            is_admin: this.props.user.is_admin,
+            nome: this.props.user.nome
+        };
     }
     changeButtonSolidario = (event, index) => {
         const { list } = this.state;
@@ -289,44 +305,44 @@ class Market extends Component {
         this.setState({ modalPedido: false });
     };
     toggleMarketFinish = () => {
-        const { list, totalPedido } = this.state;
-        let pedidoCreate = [];
-        let pedidoCreateObj = {};
-        let totalPedido2 = 0;
-        for (var a of list) {
-            if (a.isSolidary || a.isComun) {
-                if (a.quantidade && a.quantidade !== "0") {
-                    pedidoCreateObj = {
-                        indice: a.Indice,
-                        name: a.Nome,
-                        preco: a.isSolidary ? a.PrecoSolidario : a.Preco,
-                        is_solidary: a.isSolidary,
-                        is_comun: a.isComun,
-                        quantidade: a.quantidade,
-                        valor_final_produto:
-                            (a.isSolidary ? a.PrecoSolidario : a.Preco) *
-                            a.quantidade,
-                        valor_final_pedido:
-                            totalPedido +
-                            (a.isSolidary ? a.PrecoSolidario : a.Preco) *
-                                a.quantidade
-                    };
+        console.log("esse eh o this.props", this.props);
 
-                    totalPedido2 =
-                        totalPedido2 +
-                        (a.isSolidary ? a.PrecoSolidario : a.Preco) *
-                            a.quantidade;
-
-                    pedidoCreate = [...pedidoCreate, pedidoCreateObj];
-                }
-            }
-        }
+        //const { list, totalPedido } = this.state;
+        //let pedidoCreate = [];
+        //let pedidoCreateObj = {};
+        //let totalPedido2 = 0;
+        //for (var a of list) {
+        //    if (a.isSolidary || a.isComun) {
+        //        if (a.quantidade && a.quantidade !== "0") {
+        //            pedidoCreateObj = {
+        //                indice: a.Indice,
+        //                name: a.Nome,
+        //                preco: a.isSolidary ? a.PrecoSolidario : a.Preco,
+        //                is_solidary: a.isSolidary,
+        //                is_comun: a.isComun,
+        //                quantidade: a.quantidade,
+        //                valor_final_produto:
+        //                    (a.isSolidary ? a.PrecoSolidario : a.Preco) *
+        //                    a.quantidade,
+        //                valor_final_pedido:
+        //                    totalPedido +
+        //                    (a.isSolidary ? a.PrecoSolidario : a.Preco) *
+        //                        a.quantidade
+        //            };
+        //
+        //            totalPedido2 =
+        //                totalPedido2 +
+        //                (a.isSolidary ? a.PrecoSolidario : a.Preco) *
+        //                    a.quantidade;
+        //
+        //            pedidoCreate = [...pedidoCreate, pedidoCreateObj];
+        //        }
+        //    }
+        //}
 
         // setTimeout(() => {
         this.setState({
-            totalPedido: totalPedido2,
-            modalMarketSuccess: !this.state.modalMarketSuccess,
-            pedido: pedidoCreate
+            modalMarketSuccess: !this.state.modalMarketSuccess
         });
         //}, 1200);
     };
@@ -658,4 +674,12 @@ class Market extends Component {
     }
 }
 
-export default Market;
+const mapStateToProps = (state, props) => {
+    return {
+        user: state.user.user,
+        email: state.user.email,
+        id: state.user.id
+    };
+};
+
+export default connect(mapStateToProps)(Market);
