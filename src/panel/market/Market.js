@@ -23,6 +23,7 @@ import Select from "react-select";
 import "../../common/styles.css";
 import { connect } from "react-redux";
 import Imagem from "../../img/1.png";
+
 const listInitial = [
     {
         Indice: 121123,
@@ -371,7 +372,7 @@ class Market extends Component {
                         <MDBRow style={{ marginTop: 40 }}>
                             {console.log(this.state)}
                             {list.map((l, i) => (
-                                <MDBCol sm="12" md="6" lg="4" key={l.Indice}>
+                                <MDBCol sm="12" md="6" lg="3" key={l.Indice}>
                                     <MDBCard
                                         style={{
                                             height: "26rem",
@@ -548,14 +549,14 @@ class Market extends Component {
                             style={{
                                 //marginLeft: 383,
                                 //marginTop: 20,
-                                width: 120,
+                                width: 124,
                                 height: 40,
 
                                 position: "relative",
                                 float: "right"
                             }}
                         >
-                            Enviar
+                            Solicitar
                         </Button>
                     </form>
                 </CardBody>
@@ -577,7 +578,7 @@ class Market extends Component {
                         <ModalBody>
                             <MDBCol md="12">
                                 <div className="d-inline-block">
-                                    <h4 className="title">
+                                    <h5 className="title">
                                         Ao prosseguir será gerado um pedido dos
                                         produtos que foram selecionados.O valor
                                         deve ser pago na hora com o dinheiro
@@ -585,7 +586,7 @@ class Market extends Component {
                                         orgânicos que você vem buscar na quarta
                                         até as 12h. Marque a opção abaixo se
                                         estiver de acordo!
-                                    </h4>
+                                    </h5>
                                 </div>
                                 <div
                                     style={{
@@ -603,12 +604,12 @@ class Market extends Component {
                                             unidade(s)
                                         </p>
                                     ))}
-                                    {
+                                    {/*
                                         <p style={{ marginLeft: "10px" }}>
                                             <b>Valor total do Pedido: </b>R$:
                                             {this.state.totalPedido}
                                         </p>
-                                    }
+                                    */}
                                 </div>
                             </MDBCol>
                             <MDBCol md="12" style={{ padding: 5 }}>
@@ -622,6 +623,17 @@ class Market extends Component {
                             </MDBCol>
                         </ModalBody>
                         <ModalFooter>
+                            <h5
+                                className="title2"
+                                style={{ display: "flex", flex: "auto" }}
+                            >
+                                Valor total do Pedido: R$
+                                {this.state.totalPedido}
+                            </h5>
+                            {/*<p style={{ marginLeft: "10px", float: "left" }}>
+                                <b>Valor total do Pedido: </b>R$:
+                                {this.state.totalPedido}
+                            </p>*/}
                             <Button
                                 color="red lighten-1"
                                 onClick={() => {
